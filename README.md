@@ -1,4 +1,5 @@
 # divs2slides - jQuery plagin to create sildes from DIV
+## V.1.0.0
 ```
 ...
 <head>
