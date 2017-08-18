@@ -1,3 +1,9 @@
+/**
+ * divs2slides.js
+ * Ver : 1.1.0
+ * Author: meshesha , https://github.com/meshesha
+ * url:https://github.com/meshesha/divs2slides
+ */
 (function( $ ){
     var pptxjslideObj = {
         nextSlide: function(){
