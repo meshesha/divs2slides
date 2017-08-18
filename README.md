@@ -26,15 +26,17 @@
 <script>
   $("#container).divs2slides({
       first: 1,
-      nav: true,
-      keyBoardShortCut: true,
-      showSlideNum: true,
-      showTotalSlideNum: false,
-      loop: false, 
-      background : "black",
-      transition: "default", /*"slid","fade","default","random" */
-      transitionTime: 0 /** in second */
-    });
+      nav: true, /** true,false */
+      navNextTxt:"&#8250;",
+      navPrevTxt: "&#8249;",
+      keyBoardShortCut: true, /** true,false */
+      showSlideNum: true, /** true,false */
+      showTotalSlideNum: true, /** true,false */
+      autoSlide:false, /** false or seconds , TODO */
+      loop: false,  /** true,false */
+      background: false, //false or color
+      transition: "default", /* transition type: "slid","fade","default","random" */
+      transitionTime: 1 /** transition time between slides in seconds */
  </script>
  ...
  </body>
