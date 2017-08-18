@@ -1,10 +1,12 @@
 # divs2slides - jQuery plagin to create sildes from DIV
-## V.1.1.0
+## V.1.2.0
 ```
 ...
 <head>
   ....
   <script type="text/javascript" src="./js/divs2slides.js">
+  OR
+  <script type="text/javascript" src="./js/divs2slides.min.js">
   ....
 </head>
 <body>
@@ -33,14 +35,18 @@
       keyBoardShortCut: true, /** true,false */
       showSlideNum: true, /** true,false */
       showTotalSlideNum: true, /** true,false */
-      autoSlide:false, /** false or seconds , F8 to active ,keyBoardShortCut: true */
+      autoSlide:false, /** false or seconds (the pause time between slides) , F8 to active(condition: keyBoardShortCut: true) */
+      randomAutoSlide: false, /** true,false ,(condition: autoSlide:true */ 
       loop: false,  /** true,false */
       background: false, /** false or color*/
       transition: "default", /** transition type: "slid","fade","default","random" , to show transition efects :transitionTime > 0.5 */
-      transitionTime: 1 /** transition time between slides in seconds */
+      transitionTime: 1 /** transition time in seconds */
  </script>
  ...
  </body>
 ```
+
+## v1.2.0
+### Added randomAutoSlide
 ## v1.1.0
 ### Added auto slide
