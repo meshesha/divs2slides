@@ -90,6 +90,9 @@
                 case(113): // F1
                     pptxjslideObj.fullscreen();
                 break;
+                case(119): // F8
+                    pptxjslideObj.startAutoSlide();
+                break;
             }
             return true;
         },
@@ -98,6 +101,22 @@
             $("#"+div_id+" .slides-toolbar").hide();
             $("#"+div_id+" .slide").show();
             $(document.body).css("background-color",pptxjslideObj.data.prevBgColor)
+        },
+        startAutoSlide: function(){
+            var data = pptxjslideObj.data;
+            var isStrtLoop = data.isLoop;
+            t = data.loop;
+            //console.log(isStrtLoop)
+            if(t && !isStrtLoop){
+                var timeBtweenSlides = t*1000; //milisecons
+                data.isLoop = true;
+                data.loopIntrval = setInterval(function(){
+                    pptxjslideObj.nextSlide();
+                }, timeBtweenSlides);
+            }else if(isStrtLoop){
+                clearInterval(data.loopIntrval);
+                data.isLoop = false;
+            }
         },
         fullscreen: function(){
             if (!document.fullscreenElement &&    // alternative standard method
@@ -141,11 +160,11 @@
             keyBoardShortCut: true, /** true,false */
             showSlideNum: true, /** true,false */
             showTotalSlideNum: true, /** true,false */
-            autoSlide:false, /** false or seconds , TODO */
+            autoSlide:false, /** false or seconds , F8 to active ,keyBoardShortCut: true */
             loop: false,  /** true,false */
             background: false, //false or color
-            transition: "default", /*"slid","fade","default","random" */
-            transitionTime: 1 /** in seconds */
+            transition: "default", /* transition type: "slid","fade","default","random" , to show transition efects :transitionTime > 0.5 */
+            transitionTime: 1 /** transition time between slides in seconds */
         }, options );
         $("#"+divId+" .slide").hide();
         var slideCount = settings.first
@@ -158,7 +177,8 @@
             transition: settings.transition,
             transitionTime: settings.transitionTime,
             prevBgColor: prevBgColor,
-            loop: settings.loop
+            loop: settings.loop,
+            isLoop: false
         }
         if(settings.background != false){
             prevBgColor = $(document.body).css("background-color");
