@@ -1,4 +1,5 @@
 # divs2slides - jQuery plagin to create sildes from DIV
+<code>
 <div id="container">
   <div class="slide">
     .
@@ -27,3 +28,4 @@
       transitionTime: 0 /** in second */
     });
  </script>
+</code>
