@@ -1,7 +1,8 @@
 /**
  * divs2slides.js
- * Ver : 1.1.0
+ * Ver : 1.2.0
  * Author: meshesha , https://github.com/meshesha
+ * LICENSE: MIT
  * url:https://github.com/meshesha/divs2slides
  */
 (function( $ ){
@@ -9,9 +10,8 @@
         nextSlide: function(){
             var data = pptxjslideObj.data;
             var isLoop = data.loop;
-            if (data.slideCount < data.totalSlides-1){
-                pptxjslideObj.gotoSlide(data.slideCount+1);
-                //pptxjslideObj.data.slideCount++;
+            if (data.slideCount < data.totalSlides){
+                    pptxjslideObj.gotoSlide(data.slideCount+1);
             }else{
                 if(isLoop){
                     pptxjslideObj.gotoSlide(1);
@@ -31,6 +31,7 @@
             var index = idx - 1;
             var data = pptxjslideObj.data;
             var slides = data.slides;
+            var prevSlidNum = data.prevSlide;
             var transType = data.transition; /*"slid","fade","default" */
             if(transType=="random"){
                 var tType = ["","default","fade","slid"];
@@ -40,16 +41,16 @@
             var transTime = 1000*(data.transitionTime);
             if (slides[index]){
                 var nextSlide = $(slides[index]);
-                if (index >= 1 && $(slides[index - 1]).is(":visible")){
+                if (index >= 1 && $(slides[prevSlidNum]).is(":visible")){ //(index - 1)
                     if(transType=="default"){
-                        $(slides[index - 1]).hide(transTime);
+                        $(slides[prevSlidNum]).hide(transTime);
                     }else if(transType=="fade"){
-                        $(slides[index - 1]).fadeOut(transTime);
+                        $(slides[prevSlidNum]).fadeOut(transTime);
                     }else if(transType=="slid"){
-                        $(slides[index - 1]).slideUp(transTime);
+                        $(slides[prevSlidNum]).slideUp(transTime);
                     }
                     
-                }else if(index >= 0 && $(slides[index + 1]).is(":visible")){
+                }/*else if(index >= 0 && $(slides[index + 1]).is(":visible")){
                     if(transType=="default"){
                         $(slides[index + 1]).hide(transTime); 
                     }else if(transType=="fade"){
@@ -57,7 +58,7 @@
                     }else if(transType=="slid"){
                         $(slides[index + 1]).slideUp(transTime);
                     }
-                }
+                }*/
                 if(transType=="default"){
                     nextSlide.show(transTime); 
                 }else if(transType=="fade"){
@@ -65,6 +66,7 @@
                 }else if(transType=="slid"){
                     nextSlide.slideDown(transTime);
                 }
+                data.prevSlide = index;
                 pptxjslideObj.data.slideCount = idx;
                 $("#slides-slide-num").html(idx);
             }
@@ -103,21 +105,33 @@
             return true;
         },
         closeSileMode: function(){
-            var div_id= pptxjslideObj.data.divId;
+            var data = pptxjslideObj.data;
+            var div_id= data.divId;
             $("#"+div_id+" .slides-toolbar").hide();
             $("#"+div_id+" .slide").show();
-            $(document.body).css("background-color",pptxjslideObj.data.prevBgColor)
+            $(document.body).css("background-color",pptxjslideObj.data.prevBgColor);
+            if(data.isLoop){
+                clearInterval(data.loopIntrval);
+            }
         },
         startAutoSlide: function(){
             var data = pptxjslideObj.data;
             var isStrtLoop = data.isLoop;
-            t = data.loop;
+            t = data.timeBetweenSlides + data.transitionTime;
             //console.log(isStrtLoop)
-            if(t && !isStrtLoop){
+            //random slide number   -TODO
+            var slideNums = data.totalSlides;
+            var isRandomSlide = data.randomAutoSlide;
+            if((t && !isStrtLoop) || (isRandomSlide && !isStrtLoop)){
                 var timeBtweenSlides = t*1000; //milisecons
                 data.isLoop = true;
                 data.loopIntrval = setInterval(function(){
-                    pptxjslideObj.nextSlide();
+                    if(isRandomSlide){
+                        var randomSlideNum = Math.floor(Math.random() * slideNums) + 1;
+                        pptxjslideObj.gotoSlide(randomSlideNum);
+                     }else{
+                        pptxjslideObj.nextSlide();
+                     }
                 }, timeBtweenSlides);
             }else if(isStrtLoop){
                 clearInterval(data.loopIntrval);
@@ -155,22 +169,23 @@
         var target = $(this);
         var divId = target.attr("id");
         var slides = target.children();
-        var totalSlides = slides.length;
+        var totalSlides = slides.length-1;
         var prevBgColor;
         var settings = $.extend({
             // These are the defaults.
             first: 1,
-            nav: true, /** true,false */
+            nav: true, /** true,false : show or not nav buttons*/
             navNextTxt:"&#8250;",
             navPrevTxt: "&#8249;",
             keyBoardShortCut: true, /** true,false */
             showSlideNum: true, /** true,false */
             showTotalSlideNum: true, /** true,false */
-            autoSlide:false, /** false or seconds , F8 to active ,keyBoardShortCut: true */
+            autoSlide:false, /** false or seconds (the pause time between slides) , F8 to active(condition: keyBoardShortCut: true) */
+            randomAutoSlide: false, /** true,false ,(condition: autoSlide:true */ 
             loop: false,  /** true,false */
-            background: false, //false or color
-            transition: "default", /* transition type: "slid","fade","default","random" , to show transition efects :transitionTime > 0.5 */
-            transitionTime: 1 /** transition time between slides in seconds */
+            background: false, /** false or color*/
+            transition: "default", /** transition type: "slid","fade","default","random" , to show transition efects :transitionTime > 0.5 */
+            transitionTime: 1 /** transition time in seconds */
         }, options );
         $("#"+divId+" .slide").hide();
         var slideCount = settings.first
@@ -180,11 +195,13 @@
             slides:slides,
             totalSlides:totalSlides,
             slideCount: slideCount,
+            prevSlide: 0,
             transition: settings.transition,
             transitionTime: settings.transitionTime,
             prevBgColor: prevBgColor,
-            loop: settings.loop,
-            isLoop: false
+            timeBetweenSlides: settings.autoSlide,
+            isLoop: false,
+            randomAutoSlide: settings.randomAutoSlide
         }
         if(settings.background != false){
             prevBgColor = $(document.body).css("background-color");
