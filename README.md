@@ -1,5 +1,5 @@
 # divs2slides - jQuery plagin to create sildes from DIV
-## V.1.2.1
+## V.1.3.0
 ```
 ...
 <head>
@@ -32,8 +32,6 @@
       nav: true, /** true,false : show or not nav buttons*/
       showPlayPauseBtn: true, /** true,false */
       navTxtColor: "black", /** color */
-      navNextTxt:"&#8250;",
-      navPrevTxt: "&#8249;",
       keyBoardShortCut: true, /** true,false */
       showSlideNum: true, /** true,false */
       showTotalSlideNum: true, /** true,false */
@@ -47,6 +45,11 @@
  ...
  </body>
 ```
+
+## v1.3.0
+### fixed some minor bugs
+### new toolbar
+### 'navNextTxt' and 'navPrevTxt' Canceled 
 ## v1.2.1
 ### fixed some minor bugs
 ## v1.2.0
