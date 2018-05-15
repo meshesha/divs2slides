@@ -45,7 +45,87 @@
  ...
  </body>
 ```
-
+## Setting options:
+ <table class="tg">
+    <tr>
+      <th class="tg-jc4p">#</th>
+      <th class="tg-jc4p">name</th>
+      <th class="tg-jc4p">description</th>
+      <th class="tg-jc4p">default value</th>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">1</td>
+      <td class="tg-yw4l">first</td>
+      <td class="tg-yw4l">The first slide that will be loaded.</td>
+      <td class="tg-yw4l">1</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">2</td>
+      <td class="tg-yw4l">nav</td>
+      <td class="tg-yw4l">show ('true') or hide ('false') navigator buttons.</td>
+      <td class="tg-yw4l">true</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">3</td>
+      <td class="tg-yw4l">navTxtColor</td>
+      <td class="tg-yw4l">color of slide number text and total slides number shown in navigator area.</td>
+      <td class="tg-yw4l">"black"</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">4</td>
+      <td class="tg-yw4l">keyBoardShortCut</td>
+      <td class="tg-yw4l">if true , enable to control presentation by keyboard shortcuts. </td>
+      <td class="tg-yw4l">false</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">5</td>
+      <td class="tg-yw4l">showSlideNum</td>
+      <td class="tg-yw4l">if true , show slide number in navigator area.</td>
+      <td class="tg-yw4l">true</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">6</td>
+      <td class="tg-yw4l">showTotalSlideNum</td>
+      <td class="tg-yw4l">if true , show total slides number in navigator area.</td>
+      <td class="tg-yw4l">true</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">7</td>
+      <td class="tg-yw4l">autoSlide</td>
+      <td class="tg-yw4l">options:'false' or number (seconds). if set 'false' it disable auto slide mode. if set number then auto slide mode will be enabled and the number will be the time between slides.</td>
+      <td class="tg-yw4l">1</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">8</td>
+      <td class="tg-yw4l">randomAutoSlide</td>
+      <td class="tg-yw4l">if true and autoSlide mode are enabled then The slides appear in random order.</td>
+      <td class="tg-yw4l">false</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">9</td>
+      <td class="tg-yw4l">loop</td>
+      <td class="tg-yw4l">if true, in presentation mode , after last slide will go to first slide. in auto slideMode, the presentation will play in loop.</td>
+      <td class="tg-yw4l">false</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">10</td>
+      <td class="tg-yw4l">background</td>
+      <td class="tg-yw4l">color of presentation background.</td>
+      <td class="tg-yw4l">false</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">11</td>
+      <td class="tg-yw4l">transition</td>
+      <td class="tg-yw4l">transition types options: "slid","fade","default","random". </td>
+      <td class="tg-yw4l">"default"</td>
+    </tr>
+    <tr>
+      <td class="tg-yw4l">12</td>
+      <td class="tg-yw4l">transitionTime</td>
+      <td class="tg-yw4l">Time delay in seconds between slides.</td>
+      <td class="tg-yw4l">1</td>
+    </tr>
+  </table>
 ## v1.3.0
 ### fixed some minor bugs
 ### new toolbar
