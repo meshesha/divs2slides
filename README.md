@@ -126,6 +126,17 @@
       <td class="tg-yw4l">1</td>
     </tr>
   </table>
+### keyboard shortcuts:
+ ```
+  "Left arrow" or "Backspace"  - back to previous slide.
+  "Right arrow" or "Space" or "Enter" - go to next slide.
+  "Delete" - go to first slide.
+  "Esc" - exit from presentation mode.
+  "F5" - enter to presentation mode.
+  "F2" - full screen mode (in presentation mode), "Esc" to exit from fullscreen mode.
+  "F8" - strt play auto Slide mode.
+ ```
+ 
 ## v1.3.0
 ### fixed some minor bugs
 ### new toolbar
