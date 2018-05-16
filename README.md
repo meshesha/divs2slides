@@ -126,7 +126,8 @@
       <td class="tg-yw4l">1</td>
     </tr>
   </table>
-### keyboard shortcuts:
+  
+ ### keyboard shortcuts:
  ```
   "Left arrow" or "Backspace"  - back to previous slide.
   "Right arrow" or "Space" or "Enter" - go to next slide.
