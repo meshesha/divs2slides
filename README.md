@@ -1,5 +1,5 @@
 # divs2slides - jQuery plagin to create sildes from DIV
-## V.1.3.0
+
 ```
 ...
 <head>
@@ -137,7 +137,8 @@
   "F2" - full screen mode (in presentation mode), "Esc" to exit from fullscreen mode.
   "F8" - strt play auto Slide mode.
  ```
- 
+## v1.3.3
+### fixed some minor issue
 ## v1.3.0
 ### fixed some minor bugs
 ### new toolbar
